@@ -1,0 +1,73 @@
+en:
+  vagrant_multipass:
+    unregistering: |-
+      Unregistering VM...
+    removing: |-
+      Removing VM...
+    powering_off: |-
+      Powering off VM...
+    powering_on: |-
+      Powering on VM...
+    waiting_for_ssh: |-
+      Waiting for SSH...
+    copying: |-
+      Copying base box...
+    importing: |-
+      Importing VM...
+    cloning: |-
+      Cloning VM...
+    creating: |-
+      Creating VM...
+    registering: |-
+      Registering VM...
+    expand_drive: |-
+      Expand the main drive...
+    add_drive: |-
+      Creating second drive of size
+    add_nic: |-
+      Add network interface...
+    vm_already_created: |-
+      VM already created.
+    vm_not_created: |-
+      VM not created.
+    vm_not_running: |-
+      VM not running.
+    rsync_directory: |-
+      Rsyncing directory: %{hostpath} => %{guestpath}
+    
+    config:
+      host: |-
+        Multipass host not defined
+      user: |-
+        Multipass user admin not defined
+      password: |-
+        Multipass password admin not defined
+      
+    errors:
+      ovf_error: |-
+        Could not import "%{ovf_file}" with ovftool.
+        Error: %{stderr}
+      nic_error: |-
+        Could not create NIC with network "%{network}".
+        Error: %{stderr}
+      add_drive_error: |-
+        Could not create second drive.
+        Error: %{stderr}
+      expand_drive_error: |-
+        Could not expand main drive.
+        Error: %{stderr}
+      vm_notfound_error: |-
+        The VM doesn't exits: %{name}
+        Error: %{stderr}
+      vm_registering_error: |-
+        Could not register the VM.
+        Error: %{stderr}
+      vm_image_exists: |-
+        the vm image is already created. Please run 'vagrant destroy' first.
+      rsync_error: |-
+        There was an error when attemping to rsync a share folder.
+        Please inspect the error message below for more info.
+
+        Host path: %{hostpath}
+        Guest path: %{guestpath}
+        Error: %{stderr}
