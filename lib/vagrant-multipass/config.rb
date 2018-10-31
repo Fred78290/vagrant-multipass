@@ -9,6 +9,7 @@ module VagrantPlugins
       attr_accessor :network
       attr_accessor :nic_inversed
       attr_accessor :image_name
+      attr_accessor :mount_point
       attr_accessor :cloud_init
 
       # The defined network adapters.
@@ -18,6 +19,7 @@ module VagrantPlugins
  
       def initialize
         @cloud_init = {}
+        @mount_point = {}
         @network_adapters = {}
 
         @hd_size = UNSET_VALUE
@@ -31,6 +33,9 @@ module VagrantPlugins
         super.tap do |result|
           c = @cloud_init.merge(other.cloud_init)
           result.instance_variable_set(:@cloud_init, c)
+
+          c = @mount_point.merge(other.mount_point)
+          result.instance_variable_set(:@mount_point, c)
         end
       end
 

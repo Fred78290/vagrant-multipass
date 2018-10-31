@@ -13,6 +13,18 @@ module VagrantPlugins
           @app = app
         end
 
+        def mount_point(env)
+          vm_name = env[:machine].config.vm.hostname
+          config = env[:machine].provider_config
+          mount_point = config.mount_point
+
+          mount_point.each do |host,target|
+            result = Vagrant::Util::Subprocess.execute("multipass", "mount", "#{host}", "#{vm_name}:#{target}")
+
+            fail Errors::VmRegisteringMountError, stderr:result.stderr unless result.exit_code == 0
+          end
+        end
+
         def create_cloud_config(env)
           config = env[:machine].provider_config
           cloud_init = config.cloud_init
@@ -34,13 +46,14 @@ module VagrantPlugins
                 "lock_passwd" => false,
                 "passwd" => SecureRandom.hex,
                 "sudo" => "ALL=(ALL) NOPASSWD:ALL",
+                "shell" => "/bin/bash",
                 "ssh_authorized_keys" => ssh_authorized_keys
               }
             ]
 
             cloud_init["ssh_authorized_keys"] = load_ssh_authorized_keys(env)
           end
-      end
+        end
 
         def load_ssh_authorized_keys(env)
           ssh_authorized_keys = []
@@ -120,6 +133,8 @@ module VagrantPlugins
           end
           
           fail Errors::VmRegisteringError, stderr:result.stderr unless result.exit_code == 0
+
+          mount_point(env)
 
           env[:machine].id = vm_name
 

@@ -62,6 +62,9 @@ en:
       vm_registering_error: |-
         Could not register the VM.
         Error: %{stderr}
+      vm_registering_mount_error: |-
+        Could not register the VM, mount point fail.
+        Error: %{stderr}
       vm_image_exists: |-
         the vm image is already created. Please run 'vagrant destroy' first.
       rsync_error: |-

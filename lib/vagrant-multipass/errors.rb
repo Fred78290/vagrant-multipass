@@ -19,6 +19,10 @@ module VagrantPlugins
         error_key(:rsync_error)
       end
 
+      class VmRegisteringMountError < VagrantMultipassError
+        error_key(:vm_registering_mount_error)
+      end
+
       class VmRegisteringError < VagrantMultipassError
         error_key(:vm_registering_error)
       end
