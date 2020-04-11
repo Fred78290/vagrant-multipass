@@ -32,7 +32,7 @@ module VagrantPlugins
 
           unless ssh_authorized_keys.empty?
             name = (env[:machine].config.ssh.username || "vagrant")
-            
+
             cloud_init["groups"] = [
               name
             ]
@@ -89,50 +89,46 @@ module VagrantPlugins
 
           begin
             multipass_cmd = [
-              "multipass",
-              "launch",
-              "-n",
-              vm_name            
+              'multipass',
+              'launch',
+              '-n',
+              vm_name
             ]
 
             create_cloud_config(env)
 
             unless config.hd_size.nil?
-              multipass_cmd << "--disk"
+              multipass_cmd << '--disk'
               multipass_cmd << config.hd_size
             end
 
             unless config.memory_mb.nil?
-              multipass_cmd << "--mem"
+              multipass_cmd << '--mem'
               multipass_cmd << "#{config.memory_mb}M"
             end
 
             unless config.cpu_count.nil?
-              multipass_cmd << "--cpus"
-              multipass_cmd << "#{config.cpu_count}"
+              multipass_cmd << '--cpus'
+              multipass_cmd << config.cpu_count.to_s
             end
 
             unless config.cloud_init.empty?
-              cloud_init = Tempfile.open(["cloud-init-#{config.image_name}", ".yaml"])
+              cloud_init = Tempfile.open(["cloud-init-#{config.image_name}", '.yaml'])
               cloud_init.write(config.cloud_init.to_yaml)
               cloud_init.close
 
-              multipass_cmd << "--cloud-init"
+              multipass_cmd << '--cloud-init'
               multipass_cmd << cloud_init.path
             end
 
-            unless config.image_name.nil?
-              multipass_cmd << config.image_name
-            end
+            multipass_cmd << config.image_name unless config.image_name.nil?
 
             result = Vagrant::Util::Subprocess.execute(*multipass_cmd)
           ensure
-            unless config.cloud_init.empty?
-              cloud_init.delete
-            end
+            cloud_init.delete unless config.cloud_init.empty?
           end
-          
-          fail Errors::VmRegisteringError, stderr:result.stderr unless result.exit_code == 0
+
+          raise Errors::VmRegisteringError, stderr: result.stderr unless result.exit_code?
 
           mount_point(env)
 
