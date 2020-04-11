@@ -34,7 +34,7 @@ Vagrant.configure("2") do |config|
 				multipass.memory_mb = 1024
 				multipass.image_name = "bionic"
 				multipass.mount_point = {
-					"/Users" => "/Users"
+					"/home" => "/Users"
 				}
 			end
 
