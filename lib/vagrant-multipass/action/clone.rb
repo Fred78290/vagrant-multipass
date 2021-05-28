@@ -128,7 +128,7 @@ module VagrantPlugins
             File.delete(cloud_init.path) unless config.cloud_init.empty?
           end
 
-          raise Errors::VmRegisteringError, stderr: result.stderr unless result.exit_code?
+          raise Errors::VmRegisteringError, stderr: result.stderr unless result.exit_code == 0
 
           mount_point(env)
 
