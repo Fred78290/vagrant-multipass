@@ -113,7 +113,7 @@ module VagrantPlugins
             end
 
             unless config.cloud_init.empty?
-              cloud_init = Tempfile.open(["cloud-init-#{config.image_name}", '.yaml'])
+              cloud_init = File.open "cloud-init-#{vm_name}.yaml", 'w'
               cloud_init.write(config.cloud_init.to_yaml)
               cloud_init.close
 
@@ -125,7 +125,7 @@ module VagrantPlugins
 
             result = Vagrant::Util::Subprocess.execute(*multipass_cmd)
           ensure
-            cloud_init.delete unless config.cloud_init.empty?
+            File.delete(cloud_init.path) unless config.cloud_init.empty?
           end
 
           raise Errors::VmRegisteringError, stderr: result.stderr unless result.exit_code?
