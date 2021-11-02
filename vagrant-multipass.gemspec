@@ -18,11 +18,11 @@ Gem::Specification.new do |spec|
   spec.required_rubygems_version = ">= 1.3.6"
   # spec.rubyforge_project         = "vagrant-aws"
 
-  spec.add_development_dependency "bundler", '~> 1.16', '>= 1.16.1'
+  spec.add_development_dependency "bundler", '~> 2.2', '>= 2.2.10'
   #spec.add_runtime_dependency "fog", "~> 1.22"
   spec.add_runtime_dependency "iniparse", "~> 1.4", ">= 1.4.2"
 
-  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "rake", "~> 12.3", ">= 12.3.3"
   # rspec 3.4 to mock File
   spec.add_development_dependency "rspec", "~> 3.4"
   spec.add_development_dependency "rspec-its", '~> 1.2', '>= 1.2.0'
