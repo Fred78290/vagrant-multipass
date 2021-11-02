@@ -10,9 +10,9 @@ Vagrant.configure("2") do |config|
 	
 	config.vm.provider "multipass" do |multipass, override|
 		multipass.hd_size = "10G"
-		multipass.cpu_count = 1
+		multipass.cpu_count = 2
 		multipass.memory_mb = 2048
-		multipass.image_name = "bionic"
+		multipass.image_name = "focal"
 	end
 
 	(0..0).each do |i|
@@ -30,9 +30,9 @@ Vagrant.configure("2") do |config|
 
 			subconfig.vm.provider "multipass" do |multipass, override|
 				multipass.hd_size = "5G"
-				multipass.cpu_count = 1
-				multipass.memory_mb = 1024
-				multipass.image_name = "bionic"
+				multipass.cpu_count = 2
+				multipass.memory_mb = 2048
+				multipass.image_name = "focal"
 				multipass.mount_point = {
 					"/home" => "/Users"
 				}
