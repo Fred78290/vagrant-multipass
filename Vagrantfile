@@ -28,13 +28,15 @@ Vagrant.configure("2") do |config|
 				end
 			end
 
+			# Mount path is a  sample of your OS (mac / linux)
 			subconfig.vm.provider "multipass" do |multipass, override|
 				multipass.hd_size = "5G"
 				multipass.cpu_count = 2
 				multipass.memory_mb = 2048
 				multipass.image_name = "focal"
 				multipass.mount_point = {
-					"/home" => "/Users"
+					"/Users" => "/mnt/Users" # Sample mount path for MacOS Users
+					# "/home" => "/mnt/Users" # Sample mount path for Linux Users
 				}
 			end
 
