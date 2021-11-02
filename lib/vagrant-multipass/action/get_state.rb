@@ -29,7 +29,7 @@ module VagrantPlugins
 
           result = JSON.parse(result.stdout)
 
-          if result["info"][vm_name]["state"] == "RUNNING"
+          if "RUNNING".casecmp?(result["info"][vm_name]["state"])
             :running
           else
             :poweroff

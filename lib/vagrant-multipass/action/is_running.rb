@@ -19,7 +19,7 @@ module VagrantPlugins
 
           result = JSON.parse(result.stdout)
 
-          env[:result] = result["info"][vm_name]["state"] == "RUNNING"
+          env[:result] = "RUNNING".casecmp?(result["info"][vm_name]["state"])
 
           @app.call env
         end
