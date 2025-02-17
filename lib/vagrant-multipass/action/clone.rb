@@ -103,7 +103,7 @@ module VagrantPlugins
             end
 
             unless config.memory_mb.nil?
-              multipass_cmd << '--mem'
+              multipass_cmd << '--memory'
               multipass_cmd << "#{config.memory_mb}M"
             end
 
